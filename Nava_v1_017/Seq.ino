@@ -33,14 +33,6 @@ void SeqParameter()
     stopBtn.counter = 0;
     shufPolarity = 0;//Init shuffle polarity
     noteIndexCpt = 0;//init ext instrument note index counter
-    //trackPosNeedIncremante = TRUE;
-    //init Groupe pattern  position
-    /*group.pos = 0;
-     nextPattern = group.firstPattern + group.pos;
-     if(curPattern != nextPattern) selectedPatternChanged = TRUE;
-     trackPosNeedIncremante = FALSE;
-     needLcdUpdate = TRUE;*/
-
     MIDI.sendRealTime(Start);//;MidiSend(START_CMD);
     DIN_START_HIGH;
     dinStartState = HIGH;
