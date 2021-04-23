@@ -708,7 +708,7 @@ void SeqParameter()
     nextPatternReady = TRUE;
   }
 
-  if(nextPatternReady){///In pattern play mode this peace of code execute in the PPQ Count function
+  if(nextPatternReady && (( endMeasure && seq.patternSync ) || !seq.patternSync )){///In pattern play mode this peace of code execute in the PPQ Count function
     //Serial.println("Ready!!");
     //if ((isRunning && endMeasure) || !isRunning ){//|| (curSeqMode != PTRN_PLAY))
     // Serial.println("endMeasure!!");

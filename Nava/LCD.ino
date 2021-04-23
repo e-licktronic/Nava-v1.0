@@ -46,11 +46,15 @@ void LcdUpdate()
                 break;
         case 2:
                 lcd.setCursor(0,0);
-                lcd.print("syn bpm eTX mRX ");
+                lcd.print("pCH     eTX     ");
                 lcd.setCursor(cursorPos[curIndex],0);
                 lcd.print(letterUpConf[seq.configPage-1][curIndex]);
                 lcd.setCursor(0,1);
                 LcdClearLine();
+                lcd.setCursor(0,1);
+                char pchange[2];
+                strcpy_P(pchange, (char*)pgm_read_word(&(patternSync[seq.patternSync])));
+                lcd.print(pchange);
                 lcd.setCursor(9,1);
                 lcd.print(seq.EXTchannel);
                 break;

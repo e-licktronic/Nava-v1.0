@@ -122,7 +122,9 @@ void CountPPQN()
       trackPosNeedIncremante = TRUE;
       stepCount = 0;
       //In pattern play mode this peace of code execute in the PPQNCount function
-      if(nextPatternReady && curSeqMode == PTRN_PLAY){
+      Serial.print("Pattern Sync: ");
+      Serial.println(seq.patternSync);
+      if(nextPatternReady && curSeqMode == PTRN_PLAY && ( (endMeasure && seq.patternSync) || !seq.patternSync)){
         nextPatternReady = FALSE;
         keybOct = DEFAULT_OCT;
         noteIndex = 0;

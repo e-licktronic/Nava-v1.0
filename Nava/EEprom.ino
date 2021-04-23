@@ -217,6 +217,7 @@ void SaveSeqSetup()
   Wire.write((byte)(seq.TXchannel));
   Wire.write((byte)(seq.RXchannel));
   Wire.write((byte)(seq.EXTchannel));
+  Wire.write((byte)(seq.patternSync));
   int ret=Wire.endTransmission();//end page transmission
 
   Ndelay(DELAY_WR);//delay between each write page
@@ -239,6 +240,8 @@ void LoadSeqSetup()
   seq.RXchannel = constrain(seq.RXchannel, 1 ,16);
   seq.EXTchannel= (Wire.read() & 0xFF);
   seq.EXTchannel= constrain(seq.EXTchannel, 1, 16);
+  seq.patternSync = (Wire.read() & 0xFF);
+  seq.patternSync = constrain(seq.patternSync, 0, 1);
 }
 
 //Save pattern group
@@ -380,7 +383,8 @@ Serial.println("InitEEprom");
   Wire.write((byte)(DEFAULT_BPM));//seq.defaultBpm));
   Wire.write((byte)(1));//seq.TXchannel));
   Wire.write((byte)(1));//seq.RXchannel));
-
+  Wire.write((byte)(2));//seq.EXTchannel));
+  Wire.write((byte)(0));//seq.patternSync));
   Wire.endTransmission();//end page transmission
   Ndelay(DELAY_WR);//delay between each write page
   /*Serial.print("setup offset add=");

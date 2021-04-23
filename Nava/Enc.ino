@@ -135,63 +135,64 @@ void EncGet()
                   seq.syncChanged = TRUE;
                   seq.setupNeedSaved = TRUE;
                   needLcdUpdate = TRUE;
-                  break;
-              case 1://default bpm
-                  seq.defaultBpm = EncGet(seq.defaultBpm, 1);
-                  seq.defaultBpm = constrain(seq.defaultBpm, MIN_BPM, MAX_BPM);
-                  static unsigned int prevDefaultBpm;
-                  if (seq.defaultBpm != prevDefaultBpm){
-                    prevDefaultBpm = seq.defaultBpm;
-                    seq.setupNeedSaved = TRUE;
-                    needLcdUpdate = TRUE;
-                  }
-                  break;
-              case 2://Main Midi tx channel
-                  seq.TXchannel = EncGet(seq.TXchannel, 1);
-                  seq.TXchannel = constrain(seq.TXchannel, 1, 16);
-                  static unsigned int prevTX;
-                  if (seq.TXchannel != prevTX){
-                    prevTX = seq.TXchannel;
-                    seq.setupNeedSaved = TRUE;
-                    needLcdUpdate = TRUE;
-                  }
-                  break;
-              case 3://Midi RX channel
-                  seq.RXchannel = EncGet(seq.RXchannel, 1);
-                  seq.RXchannel = constrain(seq.RXchannel, 1, 16);
-                  static unsigned int prevRX;
-                  if (seq.RXchannel != prevRX){
-                    prevRX = seq.RXchannel;
-                    MIDI.setInputChannel(seq.RXchannel);
-                    seq.setupNeedSaved = TRUE;
-                    needLcdUpdate = TRUE;
-                  }
-                  break;
                 }
+                break;
+              case 1://default bpm
+                seq.defaultBpm = EncGet(seq.defaultBpm, 1);
+                seq.defaultBpm = constrain(seq.defaultBpm, MIN_BPM, MAX_BPM);
+                static unsigned int prevDefaultBpm;
+                if (seq.defaultBpm != prevDefaultBpm){
+                  prevDefaultBpm = seq.defaultBpm;
+                  seq.setupNeedSaved = TRUE;
+                  needLcdUpdate = TRUE;
+                }
+                break;
+              case 2://Main Midi tx channel
+                seq.TXchannel = EncGet(seq.TXchannel, 1);
+                seq.TXchannel = constrain(seq.TXchannel, 1, 16);
+                static unsigned int prevTX;
+                if (seq.TXchannel != prevTX){
+                  prevTX = seq.TXchannel;
+                  seq.setupNeedSaved = TRUE;
+                  needLcdUpdate = TRUE;
+                }
+                break;
+              case 3://Midi RX channel
+                seq.RXchannel = EncGet(seq.RXchannel, 1);
+                seq.RXchannel = constrain(seq.RXchannel, 1, 16);
+                static unsigned int prevRX;
+                if (seq.RXchannel != prevRX){
+                  prevRX = seq.RXchannel;
+                  MIDI.setInputChannel(seq.RXchannel);
+                  seq.setupNeedSaved = TRUE;
+                  needLcdUpdate = TRUE;
+                }
+                break;
               }
               break;
       case 2:
               switch (curIndex){
-//              case 0://sync select
-//                seq.sync = EncGet(seq.sync, 1);
-//                seq.sync = constrain(seq.sync, 0, 1);
-//                static boolean prevSeqSync;
-//                if (seq.sync != prevSeqSync){
-//                  prevSeqSync = seq.sync;
+              case 0://sync select
+                seq.patternSync = EncGet(seq.patternSync, 1);
+                seq.patternSync = constrain(seq.patternSync, 0, 1);
+                static boolean prevSeqpatternSync;
+                if (seq.patternSync != prevSeqpatternSync){
+                  prevSeqpatternSync = seq.patternSync;
 //                  seq.syncChanged = TRUE;
+                  seq.setupNeedSaved = TRUE;
+                  needLcdUpdate = TRUE;
+                }
+                break;
+//              case 1://default bpm
+//                seq.defaultBpm = EncGet(seq.defaultBpm, 1);
+//                seq.defaultBpm = constrain(seq.defaultBpm, MIN_BPM, MAX_BPM);
+//                static unsigned int prevDefaultBpm;
+//                if (seq.defaultBpm != prevDefaultBpm){
+//                  prevDefaultBpm = seq.defaultBpm;
 //                  seq.setupNeedSaved = TRUE;
 //                  needLcdUpdate = TRUE;
-//                  break;
-//              case 1://default bpm
-//                  seq.defaultBpm = EncGet(seq.defaultBpm, 1);
-//                  seq.defaultBpm = constrain(seq.defaultBpm, MIN_BPM, MAX_BPM);
-//                  static unsigned int prevDefaultBpm;
-//                  if (seq.defaultBpm != prevDefaultBpm){
-//                    prevDefaultBpm = seq.defaultBpm;
-//                    seq.setupNeedSaved = TRUE;
-//                    needLcdUpdate = TRUE;
-//                  }
-//                  break;
+//                }
+//                break;
               case 2://Main Midi tx channel
                   seq.EXTchannel = EncGet(seq.EXTchannel, 1);
                   seq.EXTchannel = constrain(seq.EXTchannel, 1, 16);

@@ -51,10 +51,15 @@ const char  txt_NOTE11[] PROGMEM   =" B";
 const char  txt_SYNC0[] PROGMEM   ="MST";
 const char  txt_SYNC1[] PROGMEM   ="SLV";
 
+const char txt_PSYNC0[] PROGMEM   ="FREE";
+const char txt_PSYNC1[] PROGMEM   ="SYNC";
+
 //synchro name
 PROGMEM const char * const nameSync[]  ={
   txt_SYNC0, txt_SYNC1};
-  
+
+PROGMEM const char * const patternSync[] ={ txt_PSYNC0, txt_PSYNC1};
+
 //instrument name-------------------------------------------------
 PROGMEM const char * const selectInstString[]={
   txt_INST0,txt_INST1,txt_INST2,txt_INST3,
