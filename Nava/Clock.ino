@@ -63,6 +63,8 @@ void CountPPQN()
 
       SetMux();
       SetDoutTrig(((pattern[ptrnBuffer].step[curStep]) | (bitRead(metronome,curStep)<<RM)) & (~muteInst));//patternA[curStep]<<8 |  patternB[curStep]);
+
+      // Send MIDI notes for the playing instruments
       for(int inst=0 ; inst < NBR_INST ; inst++ )
       {
         if ( bitRead(pattern[ptrnBuffer].inst[inst], curStep) & bitRead(~muteInst,inst) )
@@ -86,7 +88,7 @@ void CountPPQN()
       if (bitRead(pattern[ptrnBuffer].inst[EXT_INST], curStep))
       {
         InitMidiNoteOff();
-        MidiSendNoteOn(seq.TXchannel, pattern[ptrnBuffer].extNote[noteIndexCpt], HIGH_VEL);
+        MidiSendNoteOn(seq.EXTchannel, pattern[ptrnBuffer].extNote[noteIndexCpt], HIGH_VEL);
         midiNoteOnActive = TRUE;
         noteIndexCpt++;//incremente external inst note index
       }

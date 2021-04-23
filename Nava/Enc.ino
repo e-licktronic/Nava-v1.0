@@ -123,53 +123,99 @@ void EncGet()
   }
   ///////////////////////////////////CONFIG MODE////////////////////////////////////
   else if (seq.configMode){
-    switch (curIndex){
-      //track position
-    case 0://sync select
-      seq.sync = EncGet(seq.sync, 1);
-      seq.sync = constrain(seq.sync, 0, 1);
-      static boolean prevSeqSync;
-      if (seq.sync != prevSeqSync){
-        prevSeqSync = seq.sync;
-        seq.syncChanged = TRUE;
-        seq.setupNeedSaved = TRUE;
-        needLcdUpdate = TRUE;
-        break;
-      case 1://external instrument note
+    switch(seq.configPage) {
+      case 1:
+              switch (curIndex){
+              case 0://sync select
+                seq.sync = EncGet(seq.sync, 1);
+                seq.sync = constrain(seq.sync, 0, 1);
+                static boolean prevSeqSync;
+                if (seq.sync != prevSeqSync){
+                  prevSeqSync = seq.sync;
+                  seq.syncChanged = TRUE;
+                  seq.setupNeedSaved = TRUE;
+                  needLcdUpdate = TRUE;
+                  break;
+              case 1://default bpm
+                  seq.defaultBpm = EncGet(seq.defaultBpm, 1);
+                  seq.defaultBpm = constrain(seq.defaultBpm, MIN_BPM, MAX_BPM);
+                  static unsigned int prevDefaultBpm;
+                  if (seq.defaultBpm != prevDefaultBpm){
+                    prevDefaultBpm = seq.defaultBpm;
+                    seq.setupNeedSaved = TRUE;
+                    needLcdUpdate = TRUE;
+                  }
+                  break;
+              case 2://Main Midi tx channel
+                  seq.TXchannel = EncGet(seq.TXchannel, 1);
+                  seq.TXchannel = constrain(seq.TXchannel, 1, 16);
+                  static unsigned int prevTX;
+                  if (seq.TXchannel != prevTX){
+                    prevTX = seq.TXchannel;
+                    seq.setupNeedSaved = TRUE;
+                    needLcdUpdate = TRUE;
+                  }
+                  break;
+              case 3://Midi RX channel
+                  seq.RXchannel = EncGet(seq.RXchannel, 1);
+                  seq.RXchannel = constrain(seq.RXchannel, 1, 16);
+                  static unsigned int prevRX;
+                  if (seq.RXchannel != prevRX){
+                    prevRX = seq.RXchannel;
+                    MIDI.setInputChannel(seq.RXchannel);
+                    seq.setupNeedSaved = TRUE;
+                    needLcdUpdate = TRUE;
+                  }
+                  break;
+                }
+              }
+              break;
+      case 2:
+              switch (curIndex){
+//              case 0://sync select
+//                seq.sync = EncGet(seq.sync, 1);
+//                seq.sync = constrain(seq.sync, 0, 1);
+//                static boolean prevSeqSync;
+//                if (seq.sync != prevSeqSync){
+//                  prevSeqSync = seq.sync;
+//                  seq.syncChanged = TRUE;
+//                  seq.setupNeedSaved = TRUE;
+//                  needLcdUpdate = TRUE;
+//                  break;
+//              case 1://default bpm
+//                  seq.defaultBpm = EncGet(seq.defaultBpm, 1);
+//                  seq.defaultBpm = constrain(seq.defaultBpm, MIN_BPM, MAX_BPM);
+//                  static unsigned int prevDefaultBpm;
+//                  if (seq.defaultBpm != prevDefaultBpm){
+//                    prevDefaultBpm = seq.defaultBpm;
+//                    seq.setupNeedSaved = TRUE;
+//                    needLcdUpdate = TRUE;
+//                  }
+//                  break;
+              case 2://Main Midi tx channel
+                  seq.EXTchannel = EncGet(seq.EXTchannel, 1);
+                  seq.EXTchannel = constrain(seq.EXTchannel, 1, 16);
+                  static unsigned int prevEXT;
+                  if (seq.EXTchannel != prevEXT){
+                    prevEXT = seq.EXTchannel;
+                    seq.setupNeedSaved = TRUE;
+                    needLcdUpdate = TRUE;
+                  }
+                  break;
+//              case 3://Midi RX channel
+//                  seq.RXchannel = EncGet(seq.RXchannel, 1);
+//                  seq.RXchannel = constrain(seq.RXchannel, 1, 16);
+//                  static unsigned int prevRX;
+//                  if (seq.RXchannel != prevRX){
+//                    prevRX = seq.RXchannel;
+//                    MIDI.setInputChannel(seq.RXchannel);
+//                    seq.setupNeedSaved = TRUE;
+//                    needLcdUpdate = TRUE;
+//                  }
+//                  break;
+                }
+              }
 
-        seq.defaultBpm = EncGet(seq.defaultBpm, 1);
-        seq.defaultBpm = constrain(seq.defaultBpm, MIN_BPM, MAX_BPM);
-        static unsigned int prevDefaultBpm;
-        if (seq.defaultBpm != prevDefaultBpm){
-          prevDefaultBpm = seq.defaultBpm;
-          seq.setupNeedSaved = TRUE;
-          needLcdUpdate = TRUE;
-        }
-        break;
-      case 2://external instrument notes stack length
-
-        seq.TXchannel = EncGet(seq.TXchannel, 1);
-        seq.TXchannel = constrain(seq.TXchannel, 1, 16);
-        static unsigned int prevTX;
-        if (seq.TXchannel != prevTX){
-          prevTX = seq.TXchannel;
-          seq.setupNeedSaved = TRUE;
-          needLcdUpdate = TRUE;
-        }
-        break;
-      case 3://octave
-        seq.RXchannel = EncGet(seq.RXchannel, 1);
-        seq.RXchannel = constrain(seq.RXchannel, 1, 16);
-        static unsigned int prevRX;
-        if (seq.RXchannel != prevRX){
-          prevRX = seq.RXchannel;
-          MIDI.setInputChannel(seq.RXchannel);
-          seq.setupNeedSaved = TRUE;
-          needLcdUpdate = TRUE;
-        }
-        break;
-      }
-    }
   }
   else{
     seq.bpm = EncGet(seq.bpm,1);

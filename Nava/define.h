@@ -305,6 +305,7 @@ struct SeqConfig {
   boolean syncChanged;
   byte TXchannel;//MIDI transmit channel
   byte RXchannel;
+  byte EXTchannel; // MIDI transmit channel for external instrument
   unsigned int bpm;
   unsigned int defaultBpm;// stored in the eeprom
   byte dir;
@@ -459,8 +460,9 @@ const char *letterUpTrackWrite[MAX_CUR_POS]={
   "P", "P", "L", "N"};
 const char *letterUpExtInst[MAX_CUR_POS]={
   "I", "N", "L", "O"};
-const char *letterUpConf[MAX_CUR_POS]={
-  "S", "B", "M", "M"};
+const char *letterUpConf[MAX_CONF_PAGE][MAX_CUR_POS]={{
+  "S", "B", "M", "M"},{
+  "S", "B", "E", "M"}};
 
 //MIDI-----------------------------------------------
 volatile boolean midiNoteOnActive = FALSE;

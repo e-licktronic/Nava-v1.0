@@ -216,9 +216,9 @@ void SaveSeqSetup()
   Wire.write((byte)(seq.defaultBpm));
   Wire.write((byte)(seq.TXchannel));
   Wire.write((byte)(seq.RXchannel));
-
+  Wire.write((byte)(seq.EXTchannel));
   int ret=Wire.endTransmission();//end page transmission
-  Serial.println(seq.defaultBpm);
+
   Ndelay(DELAY_WR);//delay between each write page
 }
 
@@ -237,8 +237,8 @@ void LoadSeqSetup()
   seq.TXchannel = constrain(seq.TXchannel, 1 ,16);
   seq.RXchannel = (Wire.read() & 0xFF);
   seq.RXchannel = constrain(seq.RXchannel, 1 ,16);
-  Serial.println(seq.defaultBpm);
-
+  seq.EXTchannel= (Wire.read() & 0xFF);
+  seq.EXTchannel= constrain(seq.EXTchannel, 1, 16);
 }
 
 //Save pattern group

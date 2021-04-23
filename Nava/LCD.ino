@@ -30,7 +30,7 @@ void LcdUpdate()
                 lcd.setCursor(0,0);
                 lcd.print("syn bpm mTX mRX ");
                 lcd.setCursor(cursorPos[curIndex],0);
-                lcd.print(letterUpConf[curIndex]);
+                lcd.print(letterUpConf[seq.configPage-1][curIndex]);
                 lcd.setCursor(0,1);
                 LcdClearLine();
                 lcd.setCursor(0,1);
@@ -48,7 +48,11 @@ void LcdUpdate()
                 lcd.setCursor(0,0);
                 lcd.print("syn bpm eTX mRX ");
                 lcd.setCursor(cursorPos[curIndex],0);
-                lcd.print(letterUpConf[curIndex]);
+                lcd.print(letterUpConf[seq.configPage-1][curIndex]);
+                lcd.setCursor(0,1);
+                LcdClearLine();
+                lcd.setCursor(9,1);
+                lcd.print(seq.EXTchannel);
                 break;
       }
     }

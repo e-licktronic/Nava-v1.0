@@ -77,10 +77,6 @@ void setup()
   lcd.setCursor(0, 0);
   lcd.print("   CMIX v1.017  ");
   lcd.setCursor(0,1);
-  lcd.print("       by       ");
-  Ndelay(500);
-  lcd.setCursor(0,1);
-  lcd.print("Image Not Found");
   Ndelay(500);
 }
 
