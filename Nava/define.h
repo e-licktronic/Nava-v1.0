@@ -61,7 +61,7 @@
 
 //LCD
 #define MAX_CUR_POS 4
-#define MAX_CONF_PAGE 1
+#define MAX_CONF_PAGE 2
 
 //Utility
 #define TOGGLE 0

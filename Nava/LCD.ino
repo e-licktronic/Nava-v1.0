@@ -22,22 +22,35 @@ void LcdUpdate()
     needLcdUpdate = FALSE;
     if (seq.configMode)
     {
-      lcd.setCursor(0,0);
-      lcd.print("syn bpm mTX mRX ");
-      lcd.setCursor(cursorPos[curIndex],0);
-      lcd.print(letterUpConf[curIndex]);
-      lcd.setCursor(0,1);
-      LcdClearLine();
-      lcd.setCursor(0,1);
-      char  sync[2];
-      strcpy_P(sync, (char*)pgm_read_word(&(nameSync[seq.sync])));
-      lcd.print(sync);
-      lcd.setCursor(4,1);
-      lcd.print(seq.defaultBpm);
-      lcd.setCursor(9,1);
-      lcd.print(seq.TXchannel);
-      lcd.setCursor(13,1);
-      lcd.print(seq.RXchannel);
+      Serial.print("Config Page: ");
+      Serial.println(seq.configPage);
+      switch (seq.configPage)
+      {
+        case 1:
+                lcd.setCursor(0,0);
+                lcd.print("syn bpm mTX mRX ");
+                lcd.setCursor(cursorPos[curIndex],0);
+                lcd.print(letterUpConf[curIndex]);
+                lcd.setCursor(0,1);
+                LcdClearLine();
+                lcd.setCursor(0,1);
+                char  sync[2];
+                strcpy_P(sync, (char*)pgm_read_word(&(nameSync[seq.sync])));
+                lcd.print(sync);
+                lcd.setCursor(4,1);
+                lcd.print(seq.defaultBpm);
+                lcd.setCursor(9,1);
+                lcd.print(seq.TXchannel);
+                lcd.setCursor(13,1);
+                lcd.print(seq.RXchannel);
+                break;
+        case 2:
+                lcd.setCursor(0,0);
+                lcd.print("syn bpm eTX mRX ");
+                lcd.setCursor(cursorPos[curIndex],0);
+                lcd.print(letterUpConf[curIndex]);
+                break;
+      }
     }
     else{
       switch (curSeqMode){
