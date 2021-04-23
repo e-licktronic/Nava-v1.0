@@ -24,6 +24,7 @@ void SeqParameter()
   }
   //-------------------play button---------------------------
   if (playBtn.justPressed || midiStart){
+    Serial.println("Running");
     isRunning = TRUE;
     isStop = FALSE;
     ppqn = 0;
@@ -42,6 +43,7 @@ void SeqParameter()
 
   //-------------------stop button------------------------------
   if ((stopBtn.justPressed && !instBtn) || midiStop || midiContinue){
+    Serial.println("Stopped");
     //Init Midi note off
     SendAllNoteOff();//InitMidiNoteOff();
     if (midiStop) stopBtn.counter = 0;
@@ -464,7 +466,7 @@ void SeqParameter()
                 }
               }
               else{
-                SetDoutTrig(1 << instOut[a]);
+                SetDoutTrig(1 << instOut[a]);                
                 delayMicroseconds(2000);
                 SetDoutTrig(0);
                 if(isRunning) bitSet(tempInst[instOut[a]],tapStepCount);
@@ -695,7 +697,7 @@ void SeqParameter()
     trackJustSaved = FALSE;
   }
 
-  if (selectedPatternChanged)
+  if (selectedPatternChanged )
   {
     //Serial.println("changed!!");
     selectedPatternChanged = FALSE;
@@ -749,52 +751,3 @@ void SeqParameter()
     }
   }  
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
